@@ -34,40 +34,6 @@ google.options({ auth: oauth2Client });
 /**
  * Open an http server to accept the oauth callback. In this simple example, the only request to our webserver is to /callback?code=<code>
  */
-function auth() {
-const scopes = ['https://www.googleapis.com/auth/plus.me'];
-  return new Promise((resolve, reject) => {
-    // grab the url that will be used for authorization
-    const authorizeUrl = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: scopes.join(' ')
-    });
-    const server = http.createServer(async (req, res) => {
-      try {
-        if (req.url.indexOf('/quickstart') > -1) {
-          const qs = querystring.parse(url.parse(req.url).query);
-          res.end('Authentication successful! Please return to the console.');
-          server.destroy();
-          const {tokens} = await oauth2Client.getToken(qs.code);
-          oauth2Client.credentials = tokens;
-          resolve(oauth2Client);
-        }
-      } catch (e) {
-        reject(e);
-      }
-    }).listen(3000, () => {
-      // open the browser to the authorize url to start the workflow
-      opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
-    });
-    //destroyer(server);
-  });
-}
-
-async function runSample () {
-  // retrieve user profile
-  const res = await plus.people.get({ userId: 'me' });
-  console.log(res.data);
-}
 
 //For avoidong Heroku $PORT error
 app.get('/', function(request, response) {
@@ -75,8 +41,8 @@ app.get('/', function(request, response) {
     response.send(result);
 });
 app.get('/auth', function(request, response) {
-    const scopes = ['https://www.googleapis.com/auth/plus.me'];
-    const authorizeUrl = oauth2Client.generateAuthUrl({
+    var scopes = ['https://www.googleapis.com/auth/plus.me'];
+    var authorizeUrl = oauth2Client.generateAuthUrl({
         access_type: 'offline',
         scope: scopes.join(' ')
     });
