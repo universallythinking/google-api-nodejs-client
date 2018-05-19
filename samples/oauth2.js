@@ -32,8 +32,8 @@ google.options({ auth: oauth2Client });
 /**
  * Open an http server to accept the oauth callback. In this simple example, the only request to our webserver is to /callback?code=<code>
  */
-function auth () {
-  const scopes = ['https://www.googleapis.com/auth/plus.me'];
+function auth() {
+const scopes = ['https://www.googleapis.com/auth/plus.me'];
   return new Promise((resolve, reject) => {
     // grab the url that will be used for authorization
     const authorizeUrl = oauth2Client.generateAuthUrl({
@@ -60,8 +60,7 @@ function auth () {
     //destroyer(server);
   });
 }
-}
-auth();
+
 async function runSample () {
   // retrieve user profile
   const res = await plus.people.get({ userId: 'me' });
