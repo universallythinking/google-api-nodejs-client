@@ -53,11 +53,11 @@ async function authenticate (scopes) {
       } catch (e) {
         reject(e);
       }
-    }).listen(3000, () => {
+    }).listen(5000, () => {
       // open the browser to the authorize url to start the workflow
       opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
     });
-    destroyer(server);
+    //destroyer(server);
   });
 }
 
