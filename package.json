@@ -74,7 +74,7 @@
   "version": "30.0.0",
   "scripts": {
     "test": "make test -j 4",
-      "start": "node ./samples/oauth2.js"
+      "start": "node ./oauth2.js"
 },
   "author": "Google Inc.",
   "keywords": [
