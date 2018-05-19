@@ -80,7 +80,7 @@ http.createServer(function (req, res) {
         access_type: 'offline',
         scope: scopes.join(' ')
   });
-  if(url.parse(req.url).pathname == '/') {
+  if(url.parse(req.url).pathname == '/auth') {
     res.writeHead(302, {'Location': authorizeUrl});
     res.end();
   }
