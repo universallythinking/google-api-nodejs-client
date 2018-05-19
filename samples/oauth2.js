@@ -5,7 +5,7 @@ const url = require('url');
 const querystring = require('querystring');
 const opn = require('opn');
 const destroyer = require('server-destroy');
-
+let server = require('http').Server();
 const {google} = require('googleapis');
 const plus = google.plus('v1');
 
@@ -71,8 +71,11 @@ const scopes = ['https://www.googleapis.com/auth/plus.me'];
 authenticate(scopes)
   .then(client => runSample(client))
   .catch(console.error);
-http.createServer(function (req, res) {
-  const scopes = ['https://www.googleapis.com/auth/plus.me'];
+
+var port = process.env.PORT || 5000;
+server.listen(port, function() {
+    console.log("App is running on port " + port);
+    const scopes = ['https://www.googleapis.com/auth/plus.me'];
   /*authenticate(scopes)
     .then(client => runSample(client))
     .catch(console.error);*/
@@ -88,4 +91,4 @@ http.createServer(function (req, res) {
     res.writeHead(404, {'Content-Type': 'text/plain'});                    // <- redirect
     res.write("Page not found...");
   }
-}).listen(5000);
+});
