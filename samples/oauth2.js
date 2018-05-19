@@ -75,7 +75,12 @@ app.get('/', function(request, response) {
     response.send(result);
 });
 app.get('/auth', function(request, response) {
-    auth();
+    const scopes = ['https://www.googleapis.com/auth/plus.me'];
+    const authorizeUrl = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes.join(' ')
+    });
+    console.log(authorizeUrl);
     response.end();
 })
 
