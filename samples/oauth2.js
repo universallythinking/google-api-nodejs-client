@@ -73,6 +73,7 @@ http.createServer(function(req, res){
     .then(client => runSample(client))
     .catch(console.error);*/
   if(req.url.pathname == '/auth') {
+    auth();
     res.writeHead(302, {'Location': authorizeUrl});
     res.end();
   }
