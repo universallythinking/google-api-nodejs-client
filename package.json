@@ -13,7 +13,7 @@
     "qs": "^6.5.2",
     "url-template": "^2.0.8",
     "uuid": "^3.2.1",
-    "googleapis": "*".
+    "googleapis": "*",
     "express": "*"
   },
   "files": [
