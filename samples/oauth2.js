@@ -8,6 +8,10 @@ const destroyer = require('server-destroy');
 let server = require('http').Server();
 const {google} = require('googleapis');
 const plus = google.plus('v1');
+var express = require('express');
+var app     = express();
+
+app.set('port', (process.env.PORT || 5000));
 
 /**
  * To use OAuth2 authentication, we need access to a a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
@@ -67,18 +71,15 @@ async function runSample () {
   console.log(res.data);
 }
 
-
-http.createServer(function(req, res){
-  /*authenticate(scopes)
-    .then(client => runSample(client))
-    .catch(console.error);*/
-  if(req.url.pathname == '/auth') {
+//For avoidong Heroku $PORT error
+app.get('/', function(request, response) {
+    var result = 'App is running'
+    response.send(result);
+});
+app.get('/auth', function(request, response) {
     auth();
-    res.writeHead(302, {'Location': authorizeUrl});
-    res.end();
-  }
-  else {
-    res.writeHead(404, {'Content-Type': 'text/plain'});                    // <- redirect
-    res.write("Page not found...");
-  }
-}).listen(5000, '0.0.0.0');
+    response.end();
+})
+app.listen(5000, function() {
+    console.log('App is running, server is listening on port ', app.get('port'));
+});
