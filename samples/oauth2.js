@@ -72,9 +72,7 @@ authenticate(scopes)
   .then(client => runSample(client))
   .catch(console.error);
 
-var port = process.env.PORT || 5000;
-server.listen(port, function() {
-    console.log("App is running on port " + port);
+http.createServer(function(req, res){
     const scopes = ['https://www.googleapis.com/auth/plus.me'];
   /*authenticate(scopes)
     .then(client => runSample(client))
@@ -91,4 +89,4 @@ server.listen(port, function() {
     res.writeHead(404, {'Content-Type': 'text/plain'});                    // <- redirect
     res.write("Page not found...");
   }
-});
+}).listen(5000);
