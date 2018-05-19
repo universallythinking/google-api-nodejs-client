@@ -1,26 +1,26 @@
-const fs = require('fs');
-const path = require('path');
-const http = require('http');
-const url = require('url');
-const querystring = require('querystring');
-const opn = require('opn');
-const destroyer = require('server-destroy');
-let server = require('http').Server();
-const {google} = require('googleapis');
-const plus = google.plus('v1');
+var fs = require('fs');
+var path = require('path');
+var http = require('http');
+var url = require('url');
+var querystring = require('querystring');
+var opn = require('opn');
+var destroyer = require('server-destroy');
+var server = require('http').Server();
+var {google} = require('googleapis');
+var plus = google.plus('v1');
 var express = require('express');
 var app     = express();
 app.set('port',  5000);
 /**
  * To use OAuth2 authentication, we need access to a a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
  */
-const keyPath = path.join(__dirname, 'oauth2.keys.json');
-let keys = { redirect_uris: ['http://swaggeryoutube.herokuapp.com/quickstart.html'] };
+var keyPath = path.join(__dirname, 'oauth2.keys.json');
+var keys = { redirect_uris: ['http://swaggeryoutube.herokuapp.com/quickstart.html'] };
 
 /**
  * Create a new OAuth2 client with the configured keys.
  */
-const oauth2Client = new google.auth.OAuth2(
+var oauth2Client = new google.auth.OAuth2(
   "838639081436-hjg5pob0as5rrjuf6ce3fnosskvhl8f7.apps.googleusercontent.com",
   "JlDLWHrBDdYvlf3iagqmYn28",
   keys.redirect_uris[0]
