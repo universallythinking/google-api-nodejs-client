@@ -7,7 +7,7 @@ const opn = require('opn');
 const destroyer = require('server-destroy');
 
 const {google} = require('googleapis');
-const plus = google.plus('v2');
+const plus = google.plus('v1');
 
 /**
  * To use OAuth2 authentication, we need access to a a CLIENT_ID, CLIENT_SECRET, AND REDIRECT_URI.  To get these credentials for your application, visit https://console.cloud.google.com/apis/credentials.
