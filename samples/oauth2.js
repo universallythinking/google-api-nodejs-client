@@ -53,7 +53,7 @@ async function authenticate (scopes) {
       } catch (e) {
         reject(e);
       }
-    }).listen(5000, () => {
+    }).listen(3000, () => {
       // open the browser to the authorize url to start the workflow
       opn(authorizeUrl, {wait: false}).then(cp => cp.unref());
     });
@@ -71,3 +71,21 @@ const scopes = ['https://www.googleapis.com/auth/plus.me'];
 authenticate(scopes)
   .then(client => runSample(client))
   .catch(console.error);
+http.createServer(function (req, res) {
+  const scopes = ['https://www.googleapis.com/auth/plus.me'];
+  /*authenticate(scopes)
+    .then(client => runSample(client))
+    .catch(console.error);*/
+  const authorizeUrl = oauth2Client.generateAuthUrl({
+        access_type: 'offline',
+        scope: scopes.join(' ')
+  });
+  if(url.parse(req.url).pathname == '/') {
+    res.writeHead(302, {'Location': authorizeUrl});
+    res.end();
+  }
+  else {
+    res.writeHead(404, {'Content-Type': 'text/plain'});                    // <- redirect
+    res.write("Page not found...");
+  }
+}).listen(5000);
